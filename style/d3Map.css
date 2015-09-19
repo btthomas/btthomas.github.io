@@ -2,7 +2,10 @@ body {
     padding-top: 50px;
 }
 svg{
-    margin: 20px 20px;
+    margin: 15px 15px;
+}
+div#mapDiv{
+    border: 1px solid black;
 }
 .title-text {
     padding: 25px 15px;
