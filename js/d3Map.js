@@ -3,13 +3,23 @@ var svgHeight,
 
 var hMargin = 30,
     vMargin = 15;
-    scroll = 15;
-
+    
 $(window).load(initialize)
+$(window).on( 'orientationchange', resizeSVG)
+$(window).on( 'resize', _.debounce(resizeSVG, 250));
+
+function loadTheData() {
+    d3.json('data/us.json', function(err, data) {
+        if(err) {
+            console.log(err);
+            return;
+        }
+        console.log(data)
+    });
+}
 
 function initialize() {
-    
-    console.log($(window).width())
+    loadTheData();
     
     svgHeight = $(window).height() - $('#pre').position().top - 3 *vMargin;
     svgWidth = $(window).width() - 2 * hMargin;
@@ -19,15 +29,10 @@ function initialize() {
                width: svgWidth,
                class: 'svg',
         });
-    
-    //load the data
-    
-    //do the svg
+
+        //do the svg
     makeTheMap();
 }
-
-$(window).on( 'orientationchange', resizeSVG)
-$(window).on( 'resize', _.debounce(resizeSVG, 250));
 
 function resizeSVG() {
     svgHeight = $(window).height() - $('#pre').position().top - 3 *vMargin;
