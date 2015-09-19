@@ -26,9 +26,12 @@ function initialize() {
     makeTheMap();
 }
 
+$(window).on( 'orientationchange', resizeSVG)
+$(window).on( 'resize', _.debounce(resizeSVG, 250));
+
 function resizeSVG() {
-    svgHeight = $(window).height() - $('#pre').position().top - vMargin;
-    svgWidth = $(window).width() - 2 * hMargin - scroll;
+    svgHeight = $(window).height() - $('#pre').position().top - 3 *vMargin;
+    svgWidth = $(window).width() - 2 * hMargin;
     
     //then resize it
     d3.select('#mapSvg')

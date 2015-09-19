@@ -8,18 +8,6 @@ div#mapDiv{
     border: 1px solid black;
 }
 .title-text {
-    padding: 25px 15px;
-    text-align: center;
-}
-.heading-text{
-    padding: 10px 10px;
-    text-align: center;
-}
-.link-list{
-    padding: 10px 10px;
-    text-align: center;
-}
-.project-list{
-    padding: 10px 10px;
+    padding: 10px 15px;
     text-align: center;
 }
