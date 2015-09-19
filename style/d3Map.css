@@ -1,0 +1,22 @@
+body {
+    padding-top: 50px;
+}
+svg{
+    margin: 20px 20px;
+}
+.title-text {
+    padding: 25px 15px;
+    text-align: center;
+}
+.heading-text{
+    padding: 10px 10px;
+    text-align: center;
+}
+.link-list{
+    padding: 10px 10px;
+    text-align: center;
+}
+.project-list{
+    padding: 10px 10px;
+    text-align: center;
+}
