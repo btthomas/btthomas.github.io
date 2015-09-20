@@ -1,75 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <!-- Meta, title, CSS, favicons, etc. -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="Blake Thomas">
-    <title>
-      Blake Thomas
-    </title>
+---
+layout: default
+---
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-    <link href="style/index.css" rel="stylesheet">
-    <link rel="icon" href="favicon.ico">
-  </head>
-  <body>
-  
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="index.html">Blake Thomas</a>
-        </div>
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="index.html">Home</a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </nav>
-    
-    <div class="container-fluid">
-      <div class="row">
-        <div class="col-xs-6  col-xs-offset-3 title-text">
-          <h1> Blake Thomas </h1>
-        </div>
-      </div>
+<div class="home">
 
-      <div class="row">
-        <div class="col-xs-6  col-xs-offset-3 border">
-          <h3> Projects </h3>
-          <ul class="list-inline project-list">
-            <li><a href="d3MapExample.html">D3 Map Example</a></li>
-          </ul>
-        </div>
-      </div>
-      
-      <div class="space50"> </div>
+  <h1 class="page-heading">Posts</h1>
 
-      <div class="row">
-        <div class="col-xs-6  col-xs-offset-3 border">
-          <h3> External Links </h3>
-          <ul class="list-inline link-list">
-            <li><a href="http://www.github.com/btthomas">GitHub</a></li>
-            <li><a href="http://www.zipskee.com">Zipskee</a></li>
-            <li><a href="http://www.onlocationinc.com">OnLocation</a></li>
-            <li><a href="http://www.neurojet.com">NeuroJet</a></li>
-          </ul>
-        </div>
-      </div>
-      
-    </div>
-    
-    <!-- Scripts -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="js/index.js"></script>
-  </body>
-</html>
+  <ul class="post-list">
+    {% for post in site.posts %}
+      <li>
+        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
+
+        <h2>
+          <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+        </h2>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
+
+</div>
