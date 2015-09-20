@@ -10,7 +10,7 @@ $(window).on( 'orientationchange', resizeSVG)
 $(window).on( 'resize', _.debounce(resizeSVG, 250));
 
 function loadTheData() {
-    d3.json('data/us.json', function(err, data) {
+    d3.json('data/us48.json', function(err, data) {
         if(err) {
             console.log(err);
             return;
