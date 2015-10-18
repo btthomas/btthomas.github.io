@@ -5,7 +5,8 @@ author:
 
 # Site settings
 name: Blake Thomas
-title: Blake Thomas 
+title: Blake Thomas
+email: blaketaylorthomas@gmail 
 description: > # this means to ignore newlines until "baseurl:"
     Blake Thomas's personal site
 baseurl: "" # the subpath of your site, e.g. /blog/
@@ -13,11 +14,13 @@ url: "btthomas.github.io" # the base hostname & protocol for your site
 
 github_username:  btthomas
 
+kramdown:
+  input: GFM
+
 exclude:
   - README.md
   - Gemfile
   - Gemfile.lock
-
 
 # Build settings
 markdown: kramdown

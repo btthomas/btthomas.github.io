@@ -134,6 +134,7 @@ PLATFORMS
 
 DEPENDENCIES
   github-pages
+  kramdown
   rouge
 
 BUNDLED WITH

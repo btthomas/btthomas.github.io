@@ -1,11 +1,41 @@
 ---
 layout: page
 title: About
-permalink: /about/
+permalink: about.html
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](http://jekyllrb.com/)
+### Work Experience
 
-You can find the source code for the Jekyll new theme at: [github.com/jglovier/jekyll-new](https://github.com/jglovier/jekyll-new)
+[OnLocation Inc.](http://www.onlocationinc.com/) <br> 
+[Informed Simplifications](http://www.informedsimplifications.com/) <br>
+[University of Virginia Health System](http://www.medicine.virginia.edu/)
 
-You can find the source code for Jekyll at [github.com/jekyll/jekyll](https://github.com/jekyll/jekyll)
+#### Current technologies
+
+* Javascript 
+  * node.js
+    * express
+    * mongodb
+  * jquery
+  * d3.js
+  * dimple.js
+  * mocha
+    * chai
+   
+* CSS
+  * bootstrap
+  * sass
+
+#### Past technologies
+ * MatLab
+ * c++
+ * java
+ * python
+ 
+#### Currently learning
+ * Ruby
+   * Rails
+ * Python
+ * less
+ * sockets.io
+ 
