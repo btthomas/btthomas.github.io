@@ -6,7 +6,7 @@ author:
 # Site settings
 name: Blake Thomas
 title: Blake Thomas
-email: blaketaylorthomas@gmail 
+email: blaketaylorthomas@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
     Blake Thomas's personal site
 baseurl: "" # the subpath of your site, e.g. /blog/
