@@ -1,37 +1,33 @@
-<footer class="site-footer">
-
-  <div class="wrapper">
-
-    <div class="footer-col-wrapper">
-      <div class="footer-col  footer-col-1">
-        <ul class="contact-list">
-          <li>{{ site.title }}</li>
-          <li><a href="mailto:{{ site.email }}">{{ site.email }}</a></li>
-        </ul>
+<footer class="footer hidden-xs">
+  <nav id="navbar-bottom" class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <span class="navbar-brand">{{ site.title }}</span>
       </div>
-
-      <div class="footer-col  footer-col-2">
-        <ul class="social-media-list">
-          {% if site.github_username %}
-          <li>
-            <a href="https://github.com/{{ site.github_username }}">
-              <span class="username">{{ site.github_username }}</span>
-            </a>
-          </li>
-          {% endif %}
-
-        </ul>
-      </div>
-
-      <div class="footer-col  footer-col-3">
-        <p class="text">{{ site.description }}</p>
-      </div>
+      <ul class="nav navbar-nav">
+        <li><a href="mailto:{{ site.email }}"><i class="fa fa-envelope"></i>{{ site.email }}</a></li>
+        <li>
+          <a href="https://github.com/{{ site.github_username }}">
+            <span class="username"><i class="fa fa-github"></i>{{ site.github_username }}</span>
+          </a>
+        </li>  
+      </ul>  
+      <p class="navbar-text navbar-right">{{ site.description }}</p>
     </div>
-
-  </div>
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
-
+  </nav>
 </footer>
+
+<footer class="footer visible-xs-block">
+  <ul>
+    <li><a href="mailto:{{ site.email }}"><i class="fa fa-envelope"></i>{{ site.email }}</a></li>
+    <li>
+     <a href="https://github.com/{{ site.github_username }}">
+      <span class="username"><i class="fa fa-github"></i>{{ site.github_username }}</span>
+     </a>
+    </li>  
+  </ul>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
