@@ -16,7 +16,7 @@ var counter = 0;
 $('#svg').attr('width', '100%');
 var widthPerBar = $('#svg').width() / colors.length;
 
-var tick = function() {
+function tick() {
   if(!(counter++ % 60)) shuffle();
   draw();
   requestAnimationFrame(tick);
@@ -50,6 +50,6 @@ function draw() {
     join.attr('x', function(d,i) {return widthPerBar * i; })
         .attr('y', 0)
         .attr('width',widthPerBar)
-        .attr('height',function(d) {return 150 + d.length;})
+        .attr('height',function(d) {return 150 + 10*d.length;})
         .attr('fill', function(d) {return d;});
 }
