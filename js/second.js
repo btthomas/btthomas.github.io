@@ -40,16 +40,20 @@ function initCanvas() {
 
 function attachListeners() {
   
-  app.canvas.mousemove(function (e) {
+  app.canvas.on('vmousemove', function (e) {
+    console.log('move');
     XY('move', e)
   });
-  app.canvas.mousedown(function (e) {
+  app.canvas.on('vmousedown', function (e) {
+    console.log('down');
     XY('down', e)
   });
-  app.canvas.mouseup(function (e) {
+  app.canvas.on('vmouseup', function (e) {
+    console.log('up');
     XY('up', e)
   });
-  app.canvas.mouseout(function (e) {
+  app.canvas.on('mouseout', function (e) {
+    console.log('out');
     XY('up', e)
   });
 }
@@ -90,7 +94,6 @@ function XY(mouse, e) {
     case 'down':
       updateP(e);
       app.currDraw = true;
-      
       drawDot();
       break;
 
