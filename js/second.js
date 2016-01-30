@@ -40,15 +40,15 @@ function initCanvas() {
 
 function attachListeners() {
   
-  app.canvas.on('vmousemove', function (e) {
+  app.canvas.on('mousemove', function (e) {
     console.log('move');
     XY('move', e)
   });
-  app.canvas.on('vmousedown', function (e) {
+  app.canvas.on('mousedown', function (e) {
     console.log('down');
     XY('down', e)
   });
-  app.canvas.on('vmouseup', function (e) {
+  app.canvas.on('mouseup', function (e) {
     console.log('up');
     XY('up', e)
   });
