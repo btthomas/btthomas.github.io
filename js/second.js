@@ -41,21 +41,32 @@ function initCanvas() {
 function attachListeners() {
   
   app.canvas.mousemove( function (e) {
-    console.log('move');
+    //console.log('move');
     XY('move', e)
   });
   app.canvas.mousedown( function (e) {
-    console.log('down');
+    //console.log('down');
     XY('down', e)
   });
   app.canvas.mouseup( function (e) {
-    console.log('up');
+    //console.log('up');
     XY('up', e)
   });
   app.canvas.mouseout( function (e) {
-    console.log('out');
+    //console.log('out');
     XY('up', e)
   });
+  
+  //phone events
+  app.canvas.on('touchstart', function(e) {
+    e.preventDefault();
+    XY('down', e.originalEvent.touches[0])
+  });
+  app.canvas.on('touchmove', function(e) {
+    e.preventDefault();
+    XY('move', e.originalEvent.touches[0])
+  });
+    
 }
 
 function draw() {
@@ -89,7 +100,6 @@ function newP(e) {
   }
 }
 function XY(mouse, e) {
-  
   switch (mouse) {
     case 'down':
       updateP(e);
