@@ -1,0 +1,30 @@
+---
+layout: default
+title:  "Intro to canvas"
+date:   2016-01-10 12:00:00
+categories: projects
+custom_js: second
+---
+
+<div class="container-fluid">
+  <div id="content" class="row">
+    <div id="titleBlock" class="col-xs-12">
+      <h1 class="text-center"> Project #2 </h1>
+      <h3 class="text-center"> A canvas demo </h3>
+      <p class="text-center"><a href="https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API"> MDN Canvas API </a></p>
+      <br>
+      <p class="noJavascript text-center">Please enable javascript...</p>
+    </div>
+
+    <div id="menu" class="col-sm-1 col-xs-12">
+      <button id="download" class="btn btn-primary btn-block"> <i class="fa fa-camera fa-3x"></i> </button>
+      <button id="changeColor" class="btn btn-primary btn-block"> <i class="fa fa-paint-brush fa-3x"></i> </button>
+    </div>
+
+    <div id="canvasDiv" class="col-sm-10 col-xs-12">
+      <canvas id="canvas" width="370" height="400" class="text-center"></canvas>
+    </div>
+  </div>
+</div>
+
+<script src="http://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2014-11-29/FileSaver.min.js"></script>
