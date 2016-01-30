@@ -40,19 +40,19 @@ function initCanvas() {
 
 function attachListeners() {
   
-  app.canvas.on('mousemove', function (e) {
+  app.canvas.mousemove( function (e) {
     console.log('move');
     XY('move', e)
   });
-  app.canvas.on('mousedown', function (e) {
+  app.canvas.mousedown( function (e) {
     console.log('down');
     XY('down', e)
   });
-  app.canvas.on('mouseup', function (e) {
+  app.canvas.mouseup( function (e) {
     console.log('up');
     XY('up', e)
   });
-  app.canvas.on('mouseout', function (e) {
+  app.canvas.mouseout( function (e) {
     console.log('out');
     XY('up', e)
   });
