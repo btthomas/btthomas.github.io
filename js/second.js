@@ -28,7 +28,7 @@ function initButtons() {
 
 function initCanvas() {
 
-  app.ctx = canvas.getContext("2d");
+  app.ctx = canvas.getContext('2d');
   app.oldP = {x: 0, y: 0};
   app.newP = {x: 0, y: 0};
   app.currDraw = false;
@@ -127,20 +127,23 @@ function changeColor() {
 
 function randColor() {
 
+  /*
   r = Math.floor(256 * Math.random());
   g = Math.floor(256 * Math.random());
   b = Math.floor(256 * Math.random());
-  
   return d3.rgb(r,g,b).toString();
+  */
+  
+  //without d3:
+  return '#' + Math.floor(16777216 * Math.random()).toString(16);
 }
 
 function downloadPng() {
   
   var filename = 'drawing.png';
-  var canvas = document.getElementById('canvas');
   var a = document.createElement('a');
   a.download = filename;
-  a.href = canvas.toDataURL('image/png');
+  a.href = app.canvas[0].toDataURL('image/png');
   document.body.appendChild(a);
   a.click();
   a.parentNode.removeChild(a);   
