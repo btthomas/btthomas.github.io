@@ -3,18 +3,19 @@ layout: default
 ---
 <div class="container-fluid">
   <div id="content" class="row">
-  
+      
+    <div id="titleBlock" class="col-xs-12">
+      <h1 class="text-center"> {{ page.title }} </h1>
+      <h3 id="h3" class="text-center"> {{ page.subtitle }} </h3>
+      <p class="text-center"><a href={{ page.link }}> {{ page.linktext }} </a></p>
+    </div>
+    
     {% if page.custom_js %}
       <div class="noJavascript col-xs-12">
         <p class="noJavascript text-center">Please enable javascript...</p>
       </div>
     {% endif %}
-    
-    <div id="titleBlock" class="col-xs-12">
-      <h1 class="text-center"> Project #{{ page.number }} </h1>
-      <h3 id="h3" class="text-center"> {{ page.subtitle }} </h3>
-      <p class="text-center"><a href={{ page.link }}> {{ page.linktext }} </a></p>
-    </div>
+
     
     {{ content }}
     
