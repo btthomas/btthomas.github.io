@@ -113,7 +113,7 @@ function clean(dataString) {
     return data;
   } catch (err) {
     console.error(err);
-      return err;
+    return err;
   }      
 }
 
