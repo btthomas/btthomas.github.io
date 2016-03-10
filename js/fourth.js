@@ -134,7 +134,7 @@ function displayCities() {
   d3.select('#cities').selectAll('.city')
       .data(cities)
     .enter().append('circle')
-      .classed('city', true)
+      .attr('class', cityOwner)
       .attr('r', 5)
       .attr('data-radius', 5)
       .attr('stroke-width', 1)
@@ -142,6 +142,10 @@ function displayCities() {
       .attr('cy', function(d) { return projection([d.location.lon, d.location.lat])[1]})
       .on('mouseover', makeTooltip)
       .on('mouseout', removeTooltip)
+}
+
+function cityOwner(d) {
+  return 'city ' + d.owner;
 }
 
 function makeTooltip(d) {
@@ -192,6 +196,24 @@ function getCities() {
       location: {
         lat: 50.7184,
         lon: -3.5339
+      }
+    },
+    
+    {
+      owner: 'Bret',
+      name: 'Hobbiton, Matamata, NZ',
+      location: {
+        lat: -37.8092,
+        lon: 175.7725
+      }
+    },
+    
+    {
+      owner: 'Bret',
+      name: 'Ko Tao, Surat Thani, TH',
+      location: {
+        lat: 10.0956,
+        lon: 99.8404
       }
     },
   ];

@@ -19,7 +19,15 @@
 }
 
 .city{
-  stroke: green;
-  fill: blue;
   opacity: 0.9;
+
+  &.Blake{
+    fill: blue;
+    stroke: green;
+  }
+
+  &.Bret{
+    fill: orange;
+    stroke: brown;
+  }
 }
