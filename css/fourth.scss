@@ -1,0 +1,25 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+
+#map{
+  border: 1px solid black;
+  margin-bottom: 25px;
+}
+
+.land{
+  fill: lightgray;
+}
+
+.country{
+  fill: white;
+  opacity: 0.5;
+  stroke: red;
+  stroke-width: 1px;
+}
+
+.city{
+  stroke: green;
+  fill: blue;
+  opacity: 0.9;
+}
