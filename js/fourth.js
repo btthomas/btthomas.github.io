@@ -84,12 +84,11 @@ function getProjection() {
 function zoomed() {
 	d3.select('#zoomWrapper').attr('transform', 'translate(' + d3.event.translate + ')scale(' + d3.event.scale + ')');
 
-	//fix the states
+	//keep the stroke width small
 	d3.selectAll('.land')
 		.attr('stroke-width', 1 / d3.event.scale); 
-	//fix the regions
 	d3.selectAll('.country')
-		.attr('stroke-width', 1 / d3.event.scale); 
+		.style('stroke-width', 1 / d3.event.scale); 
     
   d3.selectAll('.city')
     .attr('r', function(d) {
