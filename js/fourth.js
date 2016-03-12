@@ -96,7 +96,7 @@ function zoomed() {
     })
     .attr('stroke-width', function(d) {
       return 2 / (1 + d3.event.scale)
-    })
+    });
     
   d3.selectAll('.tip');
 }
@@ -113,8 +113,8 @@ function drawLand(w, land) {
 
   d3.select('#land').append('path')
     .datum(topojson.feature(w, land))
-    .attr('d', getPath())
-    .classed('land', true);
+    .classed('land', true)
+    .attr('d', getPath());
 }
 
 function drawCountries(w, countries) {
@@ -140,7 +140,7 @@ function displayCities() {
       .attr('cx', function(d) { return projection([d.location.lon, d.location.lat])[0]})
       .attr('cy', function(d) { return projection([d.location.lon, d.location.lat])[1]})
       .on('mouseover', makeTooltip)
-      .on('mouseout', removeTooltip)
+      .on('mouseout', removeTooltip);
 }
 
 function cityOwner(d) {
@@ -156,8 +156,7 @@ function makeTooltip(d) {
     .attr('y', position[1] - 15)
     .style('opacity', 1)
     .text(d.name)
-    .classed('tip', true)
-  
+    .classed('tip', true);
 }
 
 function removeTooltip(d,i,a,b,c) {
@@ -179,7 +178,6 @@ function getCities() {
         lon: -71.5884095
       }
     },
-    
     {
       owner: 'Blake',
       name: 'Wailea, HI, USA',
@@ -188,7 +186,6 @@ function getCities() {
         lon: -156.441899
       }
     },
-    
     {
       owner: 'Blake',
       name: 'Exeter, Devon, UK',
@@ -197,7 +194,6 @@ function getCities() {
         lon: -3.5339
       }
     },
-    
     {
       owner: 'Bret',
       name: 'Hobbiton, Matamata, NZ',
@@ -206,7 +202,6 @@ function getCities() {
         lon: 175.7725
       }
     },
-    
     {
       owner: 'Bret',
       name: 'Ko Tao, Surat Thani, TH',
