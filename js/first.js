@@ -1,18 +1,30 @@
 ;'use strict'
 
-$('.noJavascript').remove();
 var colorList = [];
 var counter = 0;
 var barHeight = 300;
 var playing = true;
 var widthPerBar;
 
-setUp();
-tick();
+window.onload = function() {
+  noJavascript();
+  resize();
+  window.setTimeout(
+    setUp,
+    0
+  );
+  tick();
+}
+
+function resize() {
+    //set svg to fill div
+    d3.select('#svg').attr('width', '100%');  
+}
 
 function setUp() {
-    $('#svg').attr('width', '100%');
-    widthPerBar = $('#svg').width() / 7;
+  
+    //get 1/7th this width in pixels
+    widthPerBar = document.querySelector('#svg').width.baseVal.value / 7;
 
     var paragraph = d3.select('#content').insert('p','#svgDiv')
         .attr({

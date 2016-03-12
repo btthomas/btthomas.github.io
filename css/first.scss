@@ -1,0 +1,16 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+
+span.space {
+  margin-left: 10px;
+  margin-right: 10px;
+  padding: 2px;
+  background: lightgray;
+  
+  &:hover { 
+    cursor: pointer; 
+    color: white;
+    background: black;
+  }
+}

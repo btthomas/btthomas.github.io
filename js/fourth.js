@@ -8,7 +8,7 @@ let tic;
 window.onload = function () {
   
   tic = new Date();
-  $('.noJavascript').remove();
+  noJavascript();
   prepMap();
   drawMap();
   displayCities();
@@ -52,7 +52,7 @@ function prepMap() {
 		.attr('id', 'cities');  
 	z.append('svg:g')
 		.attr('id', 'tooltips');
-  g.append('svg:g')
+  g.append('svg:g') //don't zoom the legend
     .attr('id', 'Legend')
     .attr('transform', 'translate(10,10)');
     

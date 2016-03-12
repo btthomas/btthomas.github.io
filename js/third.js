@@ -8,7 +8,7 @@ let tic;
 window.onload = function () {
   
   tic = new Date();
-  $('.noJavascript').remove();
+  noJavascript();
   prepMap();
   drawStates(getStates());
   showElapsed();

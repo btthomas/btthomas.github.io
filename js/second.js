@@ -1,29 +1,30 @@
 ;'use strict'
 
-$('.noJavascript').remove();
-
 var app = {};
-setUp();
+
+window.onload = function() {
+  noJavascript();
+  setUp();
+}
 
 function setUp() {
 
-  app.canvas = $('#canvas');
-  var div = $('#canvasDiv');
+  app.canvas = document.getElementById('canvas');
+  var div = document.getElementById('canvasDiv');
 
-  var width = div.innerWidth() - 21;
-  var height = div.height() - 5;
+  var width = div.clientWidth - 21;
+  var height = div.clientHeight - 5;
   
-  app.canvas.attr('width', width);
-  app.canvas.attr('height', height);
-  div.css('border', '2px solid black');
+  app.canvas.width = width;
+  app.canvas.height = height;
   
   initCanvas();
   initButtons();
 }
 
 function initButtons() {
-  $('#download').click(downloadPng);
-  $('#changeColor').click(changeColor);
+  document.getElementById('download').onclick = downloadPng;
+  document.getElementById('changeColor').onclick = changeColor;
 }
 
 function initCanvas() {
@@ -40,33 +41,33 @@ function initCanvas() {
 
 function attachListeners() {
   
-  app.canvas.mousemove( function (e) {
+  app.canvas.addEventListener('mousemove', function (e) {
     //console.log('move');
     XY('move', e)
   });
-  app.canvas.mousedown( function (e) {
+  app.canvas.addEventListener('mousedown', function (e) {
     //console.log('down');
     XY('down', e)
   });
-  app.canvas.mouseup( function (e) {
+  app.canvas.addEventListener('mouseup', function (e) {
     //console.log('up');
     XY('up', e)
   });
-  app.canvas.mouseout( function (e) {
+  app.canvas.addEventListener('mouseout', function (e) {
     //console.log('out');
     XY('up', e)
   });
   
   //phone events
-  app.canvas.on('touchstart', function(e) {
+  app.canvas.addEventListener('touchstart', function(e) {
     e.preventDefault();
-    XY('down', e.originalEvent.touches[0])
+    console.log(e);
+    XY('down', e.touches[0])
   });
-  app.canvas.on('touchmove', function(e) {
+  app.canvas.addEventListener('touchmove', function(e) {
     e.preventDefault();
-    XY('move', e.originalEvent.touches[0])
+    XY('move', e.touches[0])
   });
-    
 }
 
 function draw() {
@@ -94,11 +95,33 @@ function updateP(e) {
 }
 
 function newP(e) {
+  
+  const canvasPos = getAbsolutePosition(app.canvas);
+  
   return {
-    x: e.clientX - app.canvas.offset().left,
-    y: e.clientY - app.canvas.offset().top + $(window).scrollTop()
+    x: e.clientX - canvasPos[0] - 2, //minus 2 for the border
+    y: e.clientY - canvasPos[1] + window.scrollY - 2,
   }
 }
+
+function getAbsolutePosition(el) {
+    var el2 = el;
+    var left = 0;
+    var top = 0;
+    do {
+      left += el.offsetLeft - el.scrollLeft;
+      top  += el.offsetTop  - el.scrollTop;
+      el    = el.offsetParent;
+      el2   = el2.parentNode;
+      while (el2 != el) {
+        left -= el2.scrollLeft;
+        top  -= el2.scrollTop;
+        el2   = el2.parentNode;
+      }
+    } while (el.offsetParent);
+    return [left, top];
+};
+
 function XY(mouse, e) {
   switch (mouse) {
     case 'down':
@@ -127,13 +150,6 @@ function changeColor() {
 
 function randColor() {
 
-  /*
-  r = Math.floor(256 * Math.random());
-  g = Math.floor(256 * Math.random());
-  b = Math.floor(256 * Math.random());
-  return d3.rgb(r,g,b).toString();
-  */
-  
   //without d3:
   return '#' + Math.floor(16777216 * Math.random()).toString(16);
 }
