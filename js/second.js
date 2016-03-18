@@ -159,7 +159,7 @@ function downloadPng() {
   var filename = 'drawing.png';
   var a = document.createElement('a');
   a.download = filename;
-  a.href = app.canvas[0].toDataURL('image/png');
+  a.href = app.canvas.toDataURL('image/png');
   document.body.appendChild(a);
   a.click();
   a.parentNode.removeChild(a);   
