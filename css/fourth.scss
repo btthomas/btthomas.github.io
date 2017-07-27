@@ -7,6 +7,12 @@
   margin-bottom: 25px;
 }
 
+#zoomWrapper {
+  rect {
+    opacity: 0;
+  }
+}
+
 .land{
   fill: lightgray;
 }
@@ -29,5 +35,22 @@
   &.Bret{
     fill: orange;
     stroke: brown;
+  }
+}
+
+g.d3-tooltip {
+  rect {
+    border: 1px solid black;
+    border-radius: 5px;
+    fill: #111;
+    stroke: #888;
+    stroke-width: 1px;
+    opacity: 0.8;
+  }
+
+  text {
+    fill: white;
+    text-anchor: middle;
+    font-size: 1.25em;
   }
 }
