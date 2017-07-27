@@ -10,10 +10,10 @@ window.onload = function() {
 function setUp() {
 
   app.canvas = document.getElementById('canvas');
-  var div = document.getElementById('canvasDiv');
+  const div = document.getElementById('canvasDiv');
 
-  var width = div.clientWidth - 21;
-  var height = div.clientHeight - 5;
+  const width = div.clientWidth - 21;
+  const height = div.clientHeight - 5;
   
   app.canvas.width = width;
   app.canvas.height = height;
@@ -105,21 +105,21 @@ function newP(e) {
 }
 
 function getAbsolutePosition(el) {
-    var el2 = el;
-    var left = 0;
-    var top = 0;
-    do {
-      left += el.offsetLeft - el.scrollLeft;
-      top  += el.offsetTop  - el.scrollTop;
-      el    = el.offsetParent;
+  let el2 = el;
+  let left = 0;
+  let top = 0;
+  do {
+    left += el.offsetLeft - el.scrollLeft;
+    top  += el.offsetTop  - el.scrollTop;
+    el    = el.offsetParent;
+    el2   = el2.parentNode;
+    while (el2 != el) {
+      left -= el2.scrollLeft;
+      top  -= el2.scrollTop;
       el2   = el2.parentNode;
-      while (el2 != el) {
-        left -= el2.scrollLeft;
-        top  -= el2.scrollTop;
-        el2   = el2.parentNode;
-      }
-    } while (el.offsetParent);
-    return [left, top];
+    }
+  } while (el.offsetParent);
+  return [left, top];
 };
 
 function XY(mouse, e) {
@@ -149,15 +149,12 @@ function changeColor() {
 }
 
 function randColor() {
-
-  //without d3:
   return '#' + Math.floor(16777216 * Math.random()).toString(16);
 }
 
 function downloadPng() {
-  
-  var filename = 'drawing.png';
-  var a = document.createElement('a');
+  const filename = 'drawing.png';
+  const a = document.createElement('a');
   a.download = filename;
   a.href = app.canvas.toDataURL('image/png');
   document.body.appendChild(a);
