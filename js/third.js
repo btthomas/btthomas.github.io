@@ -33,16 +33,18 @@ function prepMap() {
 	 .classed('SVGwrapper', true);
 			
 	g.append('text')
-		.attr({x: +d3.select('#map').style('width').slice(0,-2) / 2 - 100, y: 45, id:'chartTitle'})
+    .attr('x', +d3.select('#map').style('width').slice(0,-2) / 2 - 100)
+    .attr('y', 45)
+		.attr('id', 'chartTitle')
 		.classed('chartTitle', true);
 
 	//set up zoom behavior
-	const zoom = d3.behavior.zoom()
-		.translate([0,0])
-		.scale(1)
-		.scaleExtent([0.25,MAXZOOM])
-		.on('zoom', zoomed);
-	zoom(g);
+	// const zoom = d3.behavior.zoom()
+	// 	.translate([0,0])
+	// 	.scale(1)
+	// 	.scaleExtent([0.25,MAXZOOM])
+	// 	.on('zoom', zoomed);
+	// zoom(g);
 	
 	//make the gs here
 	const z = g.append('svg:g')
@@ -57,41 +59,37 @@ function prepMap() {
       .attr('id', 'Legend')
       .attr('transform', 'translate(10,10)');
 
-  const projection = d3.geo.albersUsa()
+  const projection = d3.geoAlbersUsa()
 		.scale(1.2 * g.attr('width'))
 		.translate([g.attr('width') / 2, g.attr('height') / 2]);
 
-	const path = d3.geo.path()
+	const path = d3.geoPath()
 		.projection(projection);
-    
 
   getPath = function() {
     return path;
   }
 		
-    /* info divs for click events
-    d3.select('#map1').append('div')
-      .attr('id', 'infoDivA')
-      .attr('class', 'infoDiv')
-      .style('width', '' + ((d3.select('#map1').property('clientWidth') - 60)/2) + 'px')
-      .style('float', 'left');
+  // info divs for click events
+  d3.select('#content').append('div')
+    .attr('id', 'infoDivA')
+    .attr('class', 'infoDiv col-xs-6')
 
-    d3.select('#map1').append('div')
-      .attr('id', 'infoDivB')
-      .attr('class', 'infoDiv')
-      .style('top', '10px')
-      .style('margin-left', '' + ((d3.select('#map1').property('clientWidth') - 15)/2) + 'px')
-      .style('margin-right', '15px');
-    */
+  d3.select('#content').append('div')
+    .attr('id', 'infoDivB')
+    .attr('class', 'infoDiv col-xs-6')    
 }
 
 function drawStates(stateGeoJson) {
-   
   d3.select('#States').selectAll('.state')
       .data(stateGeoJson.features)
     .enter().append('path')
       .attr('class', function(d) { return 'state state' + d.id;})
-      .attr('d', getPath());
+      .attr('stroke', 'black')
+      .attr('fill', 'white')
+      .attr('d', getPath())
+      .on('click', clickState)
+      .on('hover', hoverState);
 }
 
 function handleFiles(fileList) {
