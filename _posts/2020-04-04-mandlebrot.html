@@ -1,0 +1,45 @@
+---
+layout: plain
+number: 6
+title: 'Mandlebrot'
+date: 2020-04-04 12:00:00
+categories: projects
+custom_js: mandle
+---
+
+<style>
+  body {
+    background-color: black;
+    min-height: 100vh;
+    margin: 0;
+  }
+  canvas {
+    display: block;
+    margin: 20px auto 0;
+    border: 1px solid black;
+  }
+
+  h1,
+  #restart {
+    display: block;
+    margin: 20px auto;
+    text-align: center;
+    color: #ddd;
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+
+  #restart {
+    background-color: #333;
+    border-color: #ddd;
+  }
+</style>
+<script src="https://d3js.org/d3-color.v1.min.js"></script>
+<script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+
+<h1>Mandlebrot Zoom</h1>
+<canvas id="draw" width="500" height="400"></canvas>
+<button id="restart">restart</button>
