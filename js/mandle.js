@@ -97,11 +97,11 @@
         t = -1;
 
         while (t++ < MAX) {
-          xi = xn * xn - yn * yn + xx;
-          yi = 2 * xn * yn + yy;
-          if (xi * xi + yi * yi > 3) {
+          if (xn * xn + yn * yn > 3) {
             break;
           }
+          xi = xn * xn - yn * yn + xx;
+          yi = 2 * xn * yn + yy;
           xn = xi;
           yn = yi;
         }
