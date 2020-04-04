@@ -10,8 +10,9 @@
     x: -0.7900105002101,
     y: -0.165003159937,
   };
-  const zoomFactor = 0.15;
+  const zoomFactor = 0.1;
   let scale = [];
+  let lastTime;
 
   document.querySelector('#restart').addEventListener('click', restart);
 
@@ -23,6 +24,11 @@
   setAxis();
 
   setScale();
+
+  const imageData = ctx.createImageData(width, height);
+  const buf = new ArrayBuffer(imageData.data.length);
+  const buf8 = new Uint8ClampedArray(buf);
+  const data = new Uint32Array(buf);
 
   window.requestAnimationFrame(draw);
 
@@ -50,58 +56,68 @@
   function setScale() {
     let i = 0;
     while (i < MAX) {
-      scale.push(d3.interpolateSinebow(i / (MAX - 1)));
+      const rbg = d3
+        .interpolateTurbo(i / (MAX - 1))
+        .slice(4, -1)
+        .split(',')
+        .map((d) => +d);
+
+      scale.push((255 << 24) | (rbg[2] << 16) | (rbg[1] << 8) | rbg[0]);
       i++;
     }
   }
 
-  function color(x, y) {
-    let t = -1;
-
-    const xx = ((axis.xmax - axis.xmin) * x) / width + axis.xmin;
-    const yy = ((axis.ymax - axis.ymin) * y) / height + axis.ymin;
-
-    let xn = xx;
-    let yn = yy;
-    while (t++ < MAX) {
-      const xi = xn * xn - yn * yn + xx;
-      const yi = 2 * xn * yn + yy;
-      if (xi * xi + yi * yi > 3) {
-        break;
-      }
-      xn = xi;
-      yn = yi;
+  function draw(currTime) {
+    if (lastTime && currTime - lastTime < 50) {
+      return window.requestAnimationFrame(draw);
     }
-    return scale[t % 64];
-  }
+    // const s = MAX;
+    // console.time(s);
+    lastTime = currTime;
 
-  function draw() {
-    const imageData = ctx.createImageData(width, height);
-    const buf = new ArrayBuffer(imageData.data.length);
-    const buf8 = new Uint8ClampedArray(buf);
-    const data = new Uint32Array(buf);
+    let y = 0,
+      x = 0,
+      xx = 0,
+      yy = 0,
+      xn = 0,
+      yn = 0,
+      xi = 0,
+      yi = 0,
+      t = -1;
 
-    let colors = [];
-    for (let y = 0; y < height; y++) {
-      for (let x = 0; x < width; x++) {
-        colors = color(x, y)
-          .substr(4)
-          .split(')')[0]
-          .split(',')
-          .map((d) => +d);
+    for (; y < height; y++) {
+      for (x = 0; x < width; x++) {
+        xx = ((axis.xmax - axis.xmin) * x) / width + axis.xmin;
+        yy = ((axis.ymax - axis.ymin) * y) / height + axis.ymin;
 
-        data[y * width + x] =
-          (255 << 24) | (colors[2] << 16) | (colors[1] << 8) | colors[0];
+        xn = xx;
+        yn = yy;
+        xi = 0;
+        yi = 0;
+        t = -1;
+
+        while (t++ < MAX) {
+          xi = xn * xn - yn * yn + xx;
+          yi = 2 * xn * yn + yy;
+          if (xi * xi + yi * yi > 3) {
+            break;
+          }
+          xn = xi;
+          yn = yi;
+        }
+
+        data[y * width + x] = scale[t % 64];
       }
     }
     imageData.data.set(buf8);
     ctx.putImageData(imageData, 0, 0);
 
     zoom();
-    if (MAX++ > 255) {
+    if (MAX++ > 380) {
       restart();
     }
 
+    // console.timeEnd(s);
     window.requestAnimationFrame(draw);
   }
 
