@@ -22,16 +22,34 @@ custom_js: mandle
   h1,
   #restart {
     display: block;
-    margin: 20px auto;
     text-align: center;
     color: #ddd;
   }
 
   h1 {
+    margin: 20px auto;
     font-size: 20px;
   }
 
+  .inputs label {
+    flex: 1;
+    display: flex;
+    margin: 5px auto;
+    max-width: 500px;
+  }
+
+  .inputs div {
+    flex: 0;
+    color: #ddd;
+    margin-right: 10px;
+  }
+
+  .inputs input {
+    flex: 1;
+  }
+
   #restart {
+    margin: 5px auto 0;
     background-color: #333;
     border-color: #ddd;
   }
@@ -42,4 +60,14 @@ custom_js: mandle
 
 <h1>Mandlebrot Zoom</h1>
 <canvas id="draw" width="500" height="400"></canvas>
+<div class="inputs">
+  <label>
+    <div>X:</div>
+    <input class="x" type="number" value="-0.7900105002101" />
+  </label>
+  <label>
+    <div>Y:</div>
+    <input class="y" type="number" value="0.165003159937" />
+  </label>
+</div>
 <button id="restart">restart</button>

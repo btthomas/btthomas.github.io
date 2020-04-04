@@ -123,6 +123,9 @@
 
   function restart() {
     MAX = 64;
+    const inputs = document.querySelector('.inputs');
+    goal.x = +inputs.querySelector('.x').value;
+    goal.y = 0 - +inputs.querySelector('.y').value;
     setAxis();
   }
 })();
