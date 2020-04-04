@@ -18,7 +18,7 @@
   const canvas = document.querySelector('canvas');
   canvas.height = height;
   canvas.width = width;
-  const ctx = canvas.getContext('2d');
+  const ctx = canvas.getContext('2d', { alpha: false });
 
   setAxis();
 
@@ -66,7 +66,7 @@
     while (t++ < MAX) {
       const xi = xn * xn - yn * yn + xx;
       const yi = 2 * xn * yn + yy;
-      if (xi * xi + yi * yi > 4) {
+      if (xi * xi + yi * yi > 3) {
         break;
       }
       xn = xi;
