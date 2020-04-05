@@ -9,7 +9,6 @@
   const CR = 0.02;
   const omega = 0.005;
   const MAX = 128;
-  const COLORS = 127;
   const PI = Math.PI;
   const MAX_SPEED = 75;
   let lastTime;
@@ -17,6 +16,7 @@
   let scale = [];
   let cx, cy;
   let theta = 0;
+  let currentColorScale = d3.interpolateSpectral;
 
   document.querySelector('#restart').addEventListener('click', restart);
 
@@ -31,9 +31,7 @@
   const data = new Uint32Array(buf);
 
   setAxis();
-
   setScale();
-
   rotate();
 
   window.requestAnimationFrame(draw);
@@ -60,15 +58,33 @@
     }
   }
 
-  function setScale() {
-    let i = 0;
-    while (i <= COLORS) {
-      const rbg = d3
-        .interpolateCubehelixDefault(i / COLORS)
-        .slice(4, -1)
-        .split(',')
-        .map((d) => +d);
+  window.handleChangeColor = function (str) {
+    currentColorScale = d3[str];
+    setScale();
+  };
 
+  function setScale() {
+    scale = [];
+    let i = 0;
+    let rbg = [];
+
+    while (i < MAX) {
+      const color = currentColorScale(i / (MAX - 1));
+
+      if (color[0] === '#') {
+        // hex string
+        rbg = [
+          +`0x${color.slice(1, 3)}`,
+          +`0x${color.slice(3, 5)}`,
+          +`0x${color.slice(5)}`,
+        ];
+      } else {
+        // rgb string
+        rbg = color
+          .slice(4, -1)
+          .split(',')
+          .map((d) => +d);
+      }
       scale.push((255 << 24) | (rbg[2] << 16) | (rbg[1] << 8) | rbg[0]);
       i++;
     }
@@ -108,7 +124,7 @@
           xn = xi;
         }
 
-        data[y * width + x] = scale[t % (COLORS + 1)];
+        data[y * width + x] = scale[t % MAX];
       }
     }
     imageData.data.set(buf8);
@@ -119,7 +135,7 @@
   }
 
   function restart() {
-    const inputs = document.querySelector('.inputs');
+    const inputs = document.getElementById('inputs');
     CX = +inputs.querySelector('.x').value;
     CY = +inputs.querySelector('.y').value;
     theta = 0;

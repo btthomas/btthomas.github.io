@@ -4,7 +4,9 @@ number: 6
 title: 'Julia Orbit'
 date: 2020-04-05 12:00:00
 categories: projects
-custom_js: julia
+custom_js:
+  - julia
+  - color
 ---
 
 <style>
@@ -15,7 +17,7 @@ custom_js: julia
   }
   canvas {
     display: block;
-    margin: 20px auto 0;
+    margin: 10px auto 0;
     border: 1px solid black;
   }
 
@@ -27,25 +29,33 @@ custom_js: julia
   }
 
   h1 {
-    margin: 20px auto;
+    margin: 10px auto;
     font-size: 20px;
   }
 
-  .inputs label {
-    flex: 1;
+  .color,
+  #inputs label {
     display: flex;
+    align-items: center;
     margin: 5px auto;
+    width: 95%;
     max-width: 500px;
   }
 
-  .inputs div {
-    flex: 0;
+  .color div,
+  #inputs div {
+    flex: 0 0 auto;
     color: #ddd;
     margin-right: 10px;
   }
 
-  .inputs input {
+  .color select,
+  #inputs input {
     flex: 1;
+    background-color: #ddd;
+    color: #333;
+    border-radius: 5px;
+    padding: 1px;
   }
 
   #restart {
@@ -59,8 +69,12 @@ custom_js: julia
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 
 <h1>Julia Orbit</h1>
+<label class="color">
+  <div>Color Scheme:</div>
+  <select id="color"></select>
+</label>
 <canvas id="draw" width="800" height="600"></canvas>
-<div class="inputs">
+<div id="inputs">
   <label>
     <div>CX:</div>
     <input class="x" type="number" value="-0.775" />
