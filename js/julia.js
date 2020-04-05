@@ -1,20 +1,22 @@
 (function () {
   cWidth = document.body.clientWidth;
   cHeight = document.body.clientHeight;
-  const width = cWidth > 500 ? 500 : cWidth;
-  const height = cHeight > 400 ? 400 : cHeight;
+  const width = cWidth > 800 ? 800 : cWidth;
+  const height = cHeight > 600 ? 600 : cHeight;
 
-  const cx = -0.8;
-  const cy = 0.156;
-  let MAX = 64;
-  let axis;
-  const goal = {
-    x: 0.2434913,
-    y: -0.25,
-  };
-  const zoomFactor = 0.06;
-  let scale = [];
+  let CX = -0.775;
+  let CY = 0.1625;
+  const CR = 0.02;
+  const omega = 0.005;
+  const MAX = 128;
+  const COLORS = 127;
+  const PI = Math.PI;
+  const MAX_SPEED = 75;
   let lastTime;
+  let axis;
+  let scale = [];
+  let cx, cy;
+  let theta = 0;
 
   document.querySelector('#restart').addEventListener('click', restart);
 
@@ -23,43 +25,36 @@
   canvas.width = width;
   const ctx = canvas.getContext('2d', { alpha: false });
 
-  setAxis();
-
-  setScale();
-
   const imageData = ctx.createImageData(width, height);
   const buf = new ArrayBuffer(imageData.data.length);
   const buf8 = new Uint8ClampedArray(buf);
   const data = new Uint32Array(buf);
 
+  setAxis();
+
+  setScale();
+
+  rotate();
+
   window.requestAnimationFrame(draw);
 
   function setAxis() {
     const aspectRatio = height / width;
-    const startingWidth = 4;
+    const startingWidth = 2;
 
     axis = {
-      xmin: -2,
-      xmax: 2,
+      xmin: -1,
+      xmax: -1 + startingWidth,
       ymin: (-aspectRatio * startingWidth) / 2,
       ymax: (aspectRatio * startingWidth) / 2,
     };
   }
 
-  function zoom() {
-    axis = {
-      xmin: (1 - zoomFactor) * axis.xmin + zoomFactor * goal.x,
-      xmax: (1 - zoomFactor) * axis.xmax + zoomFactor * goal.x,
-      ymin: (1 - zoomFactor) * axis.ymin + zoomFactor * goal.y,
-      ymax: (1 - zoomFactor) * axis.ymax + zoomFactor * goal.y,
-    };
-  }
-
   function setScale() {
     let i = 0;
-    while (i < MAX) {
+    while (i <= COLORS) {
       const rbg = d3
-        .interpolateRainbow(i / (MAX - 1))
+        .interpolateCubehelixDefault(i / COLORS)
         .slice(4, -1)
         .split(',')
         .map((d) => +d);
@@ -69,8 +64,14 @@
     }
   }
 
+  function rotate() {
+    cx = Math.cos(theta * 2 * PI) * CR + CX;
+    cy = Math.sin(theta * 2 * PI) * CR + CY;
+    theta += omega;
+  }
+
   function draw(currTime) {
-    if (lastTime && currTime - lastTime < 50) {
+    if (lastTime && currTime - lastTime < MAX_SPEED) {
       return window.requestAnimationFrame(draw);
     }
     lastTime = currTime;
@@ -89,7 +90,7 @@
         t = -1;
 
         while (t++ < MAX) {
-          if (xn * xn + yn * yn > 2) {
+          if (xn * xn + yn * yn > 3) {
             break;
           }
           xi = xn * xn - yn * yn + cx;
@@ -97,25 +98,21 @@
           xn = xi;
         }
 
-        data[y * width + x] = scale[t % 64];
+        data[y * width + x] = scale[t % (COLORS + 1)];
       }
     }
     imageData.data.set(buf8);
     ctx.putImageData(imageData, 0, 0);
 
-    zoom();
-    if (MAX++ > 320) {
-      restart();
-    }
-
+    rotate();
     window.requestAnimationFrame(draw);
   }
 
   function restart() {
-    MAX = 64;
     const inputs = document.querySelector('.inputs');
-    goal.x = +inputs.querySelector('.x').value;
-    goal.y = 0 - +inputs.querySelector('.y').value;
-    setAxis();
+    CX = +inputs.querySelector('.x').value;
+    CY = +inputs.querySelector('.y').value;
+    theta = 0;
+    rotate();
   }
 })();
