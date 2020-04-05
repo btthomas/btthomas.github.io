@@ -40,14 +40,24 @@
 
   function setAxis() {
     const aspectRatio = height / width;
-    const startingWidth = 2;
+    const maxStartingWidth = 2;
+    const maxStartingHeight = 2;
 
-    axis = {
-      xmin: -1,
-      xmax: -1 + startingWidth,
-      ymin: (-aspectRatio * startingWidth) / 2,
-      ymax: (aspectRatio * startingWidth) / 2,
-    };
+    if (aspectRatio < 1) {
+      axis = {
+        xmin: -1,
+        xmax: -1 + maxStartingWidth,
+        ymin: (-aspectRatio * maxStartingWidth) / 2,
+        ymax: (aspectRatio * maxStartingWidth) / 2,
+      };
+    } else {
+      axis = {
+        xmin: -maxStartingHeight / (2 * aspectRatio),
+        xmax: maxStartingHeight / (2 * aspectRatio),
+        ymin: -1,
+        ymax: -1 + maxStartingHeight,
+      };
+    }
   }
 
   function setScale() {
