@@ -16,7 +16,7 @@
   let scale = [];
   let cx, cy;
   let theta = 0;
-  let currentColorScale = d3.interpolateSpectral;
+  let currentColorScale = d3.interpolateCubehelixDefault;
 
   document.querySelector('#restart').addEventListener('click', restart);
 

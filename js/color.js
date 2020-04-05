@@ -44,7 +44,7 @@
   select.innerHTML = COLOR_LIST.map(
     (c) => `<option value="${c}">${c}</option>`
   ).join('');
-  select.value = 'interpolateSpectral';
+  select.value = 'interpolateCubehelixDefault';
 
   select.addEventListener('change', changeColor);
 
