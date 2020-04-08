@@ -5,8 +5,9 @@ title: 'Julia Orbit'
 date: 2020-04-05 12:00:00
 categories: projects
 custom_js:
-  - julia
   - color
+  - julia
+  - clipboard
 ---
 
 <style>
@@ -21,16 +22,12 @@ custom_js:
     border: 1px solid black;
   }
 
-  h1,
-  #restart {
-    display: block;
-    text-align: center;
-    color: #ddd;
-  }
-
   h1 {
+    display: block;
     margin: 10px auto;
+    color: #ddd;
     font-size: 20px;
+    text-align: center;
   }
 
   .color,
@@ -58,17 +55,25 @@ custom_js:
     padding: 1px;
   }
 
-  #restart {
+  .buttons {
+    display: flex;
+    justify-content: center;
+  }
+
+  .buttons button {
     margin: 5px auto 0;
     background-color: #333;
     border-color: #ddd;
+    color: #ddd;
   }
 </style>
 <script src="https://d3js.org/d3-color.v1.min.js"></script>
 <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 
-<h1>Julia Orbit</h1>
+<h1>
+  <a href="https://en.wikipedia.org/wiki/Julia_set">Julia Wiki</a>
+</h1>
 <label class="color">
   <div>Color Scheme:</div>
   <select id="color"></select>
@@ -83,5 +88,12 @@ custom_js:
     <div>CY:</div>
     <input class="y" type="number" value="0.1625" />
   </label>
+  <label>
+    <div>CR:</div>
+    <input class="r" type="number" value="0.25" />
+  </label>
 </div>
-<button id="restart">restart</button>
+<div class="buttons">
+  <button id="reset">Reset</button>
+  <button id="share">Share</button>
+</div>

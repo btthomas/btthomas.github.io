@@ -40,11 +40,10 @@
     'interpolateSinebow',
   ];
 
-  select = document.getElementById('color');
+  const select = document.getElementById('color');
   select.innerHTML = COLOR_LIST.map(
     (c) => `<option value="${c}">${c}</option>`
   ).join('');
-  select.value = 'interpolateCubehelixDefault';
 
   select.addEventListener('change', changeColor);
 
