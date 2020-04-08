@@ -199,8 +199,8 @@
     CX = +inputs.querySelector('.x').value;
     CY = +inputs.querySelector('.y').value;
     CR = +inputs.querySelector('.r').value;
-    theta = 0;
-    rotate(omega);
+    const url = `https://btthomas.github.io/projects/2020/04/05/julia.html?cx=${CX}&cy=${CY}&cr=${CR}&color=${select.value}`;
+    window.location = url;
   }
 
   function share() {
