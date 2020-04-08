@@ -48,8 +48,9 @@ h1 {
 
 .buttons {
   display: flex;
+  max-width: 500px;
+  margin: 0 auto 10px;
   justify-content: center;
-  margin-bottom: 10px;
 
   button {
     margin: 5px auto 0;

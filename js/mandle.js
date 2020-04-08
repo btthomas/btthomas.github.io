@@ -5,6 +5,8 @@
   const height = cHeight > 400 ? 400 : cHeight;
 
   const MAX_SPEED = 16;
+  const COLORS = 64;
+  let counter = 0;
   let MAX = 64;
   let axis;
   let GX = -0.7900105002101;
@@ -107,8 +109,8 @@
     }
 
     let i = 0;
-    while (i < MAX) {
-      const rbg = currentColorScale(i / (MAX - 1))
+    while (i < COLORS) {
+      const rbg = currentColorScale(i / (COLORS - 1))
         .slice(4, -1)
         .split(',')
         .map((d) => +d);
@@ -154,15 +156,16 @@
           xn = xi;
         }
 
-        data[y * width + x] = scale[t % 64];
+        data[y * width + x] = scale[t % COLORS];
       }
     }
     imageData.data.set(buf8);
     ctx.putImageData(imageData, 0, 0);
 
     zoom();
-    MAX += 0.5;
-    if (MAX > 380) {
+
+    MAX += counter = 1 - counter;
+    if (MAX > 375) {
       reset();
     }
 
