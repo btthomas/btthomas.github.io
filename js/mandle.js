@@ -61,7 +61,7 @@
         if (isNaN(GY)) {
           GY = -0.165003159937;
         }
-        inputs.querySelector('.y').value = GY;
+        inputs.querySelector('.y').value = -GY;
       }
 
       const color = params.get('color');
@@ -107,7 +107,7 @@
     if (d3Scale) {
       currentColorScale = d3[d3Scale];
     }
-
+    scale = [];
     let i = 0;
     while (i < COLORS) {
       const rbg = currentColorScale(i / (COLORS - 1))
@@ -194,8 +194,8 @@
   }
 })();
 
-// -0.791000102001;
-// 0.164000949002;
+// -0.791000102001
+// 0.164000949002
 
-// -0.7889010749955;
-// 0.1614890499899;
+// -0.7889010749955
+// 0.1614890499899
