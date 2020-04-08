@@ -8,66 +8,10 @@ custom_js:
   - color
   - julia
   - clipboard
+custom_css:
+  - mandle
 ---
 
-<style>
-  body {
-    background-color: black;
-    min-height: 100vh;
-    margin: 0;
-  }
-  canvas {
-    display: block;
-    margin: 10px auto 0;
-    border: 1px solid black;
-  }
-
-  h1 {
-    display: block;
-    margin: 10px auto;
-    color: #ddd;
-    font-size: 20px;
-    text-align: center;
-  }
-
-  .color,
-  #inputs label {
-    display: flex;
-    align-items: center;
-    margin: 5px auto;
-    width: 95%;
-    max-width: 500px;
-  }
-
-  .color div,
-  #inputs div {
-    flex: 0 0 auto;
-    color: #ddd;
-    margin-right: 10px;
-  }
-
-  .color select,
-  #inputs input {
-    flex: 1;
-    background-color: #ddd;
-    color: #333;
-    border-radius: 5px;
-    padding: 1px;
-  }
-
-  .buttons {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 10px;
-  }
-
-  .buttons button {
-    margin: 5px auto 0;
-    background-color: #333;
-    border-color: #ddd;
-    color: #ddd;
-  }
-</style>
 <script src="https://d3js.org/d3-color.v1.min.js"></script>
 <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>

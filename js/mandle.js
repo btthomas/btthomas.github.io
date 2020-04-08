@@ -4,33 +4,73 @@
   const width = cWidth > 500 ? 500 : cWidth;
   const height = cHeight > 400 ? 400 : cHeight;
 
+  const MAX_SPEED = 16;
   let MAX = 64;
   let axis;
-  const goal = {
-    x: -0.7900105002101,
-    y: -0.165003159937,
-  };
-  const zoomFactor = 0.1;
+  let GX = -0.7900105002101;
+  let GY = -0.165003159937;
+
+  const zoomFactor = 0.05;
   let scale = [];
   let lastTime;
+  let currentColorScale;
 
-  document.querySelector('#restart').addEventListener('click', restart);
+  const select = document.getElementById('color');
 
   const canvas = document.querySelector('canvas');
   canvas.height = height;
   canvas.width = width;
   const ctx = canvas.getContext('2d', { alpha: false });
 
-  setAxis();
-
-  setScale();
-
   const imageData = ctx.createImageData(width, height);
   const buf = new ArrayBuffer(imageData.data.length);
   const buf8 = new Uint8ClampedArray(buf);
   const data = new Uint32Array(buf);
 
-  window.requestAnimationFrame(draw);
+  init();
+
+  function init() {
+    readParams();
+    setAxis();
+    setScale();
+
+    document.getElementById('reset').addEventListener('click', reset);
+    document.querySelector('#share').addEventListener('click', share);
+
+    window.requestAnimationFrame(draw);
+  }
+
+  function readParams() {
+    try {
+      let params = new URL(document.location).searchParams;
+
+      const x = params.get('x');
+      if (x != null) {
+        GX = +x;
+        if (isNaN(GX)) {
+          GX = -0.7900105002101;
+        }
+        inputs.querySelector('.x').value = GX;
+      }
+
+      const y = params.get('y');
+      if (y != null) {
+        GY = 0 - +y;
+        if (isNaN(GY)) {
+          GY = -0.165003159937;
+        }
+        inputs.querySelector('.y').value = GY;
+      }
+
+      const color = params.get('color');
+      if (color != null && d3[color] != undefined) {
+        currentColorScale = d3[color];
+        select.value = color;
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  }
 
   function setAxis() {
     const aspectRatio = height / width;
@@ -46,18 +86,29 @@
 
   function zoom() {
     axis = {
-      xmin: (1 - zoomFactor) * axis.xmin + zoomFactor * goal.x,
-      xmax: (1 - zoomFactor) * axis.xmax + zoomFactor * goal.x,
-      ymin: (1 - zoomFactor) * axis.ymin + zoomFactor * goal.y,
-      ymax: (1 - zoomFactor) * axis.ymax + zoomFactor * goal.y,
+      xmin: (1 - zoomFactor) * axis.xmin + zoomFactor * GX,
+      xmax: (1 - zoomFactor) * axis.xmax + zoomFactor * GX,
+      ymin: (1 - zoomFactor) * axis.ymin + zoomFactor * GY,
+      ymax: (1 - zoomFactor) * axis.ymax + zoomFactor * GY,
     };
   }
 
-  function setScale() {
+  window.handleChangeColor = function (str) {
+    setScale(str);
+  };
+
+  function setScale(d3Scale) {
+    if (d3Scale == undefined && currentColorScale == undefined) {
+      d3Scale = 'interpolateTurbo';
+      select.value = d3Scale;
+    }
+    if (d3Scale) {
+      currentColorScale = d3[d3Scale];
+    }
+
     let i = 0;
     while (i < MAX) {
-      const rbg = d3
-        .interpolateTurbo(i / (MAX - 1))
+      const rbg = currentColorScale(i / (MAX - 1))
         .slice(4, -1)
         .split(',')
         .map((d) => +d);
@@ -68,7 +119,7 @@
   }
 
   function draw(currTime) {
-    if (lastTime && currTime - lastTime < 50) {
+    if (lastTime && currTime - lastTime < MAX_SPEED) {
       return window.requestAnimationFrame(draw);
     }
     // const s = MAX;
@@ -110,19 +161,38 @@
     ctx.putImageData(imageData, 0, 0);
 
     zoom();
-    if (MAX++ > 380) {
-      restart();
+    MAX += 0.5;
+    if (MAX > 380) {
+      reset();
     }
 
     // console.timeEnd(s);
     window.requestAnimationFrame(draw);
   }
 
-  function restart() {
+  function reset() {
     MAX = 64;
-    const inputs = document.querySelector('.inputs');
-    goal.x = +inputs.querySelector('.x').value;
-    goal.y = 0 - +inputs.querySelector('.y').value;
+    const inputs = document.getElementById('inputs');
+    GX = +inputs.querySelector('.x').value;
+    GY = 0 - +inputs.querySelector('.y').value;
     setAxis();
   }
+
+  function share() {
+    const url = `https://btthomas.github.io/projects/2020/04/04/mandlebrot.html?x=${GX}&y=${
+      0 - GY
+    }&color=${select.value}`;
+    copyToClipboard(url);
+    showMessage();
+  }
+
+  function showMessage() {
+    window.alert('Your URL is copied to your clipboard');
+  }
 })();
+
+// -0.791000102001;
+// 0.164000949002;
+
+// -0.7889010749955;
+// 0.1614890499899;
