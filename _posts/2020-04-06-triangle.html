@@ -1,13 +1,11 @@
 ---
 layout: plain
 number: 6
-title: 'Julia Orbit'
+title: 'Sierpiński triangle'
 date: 2020-04-05 12:00:00
 categories: projects
 custom_js:
-  - color
-  - julia
-  - clipboard
+  - triangle
 ---
 
 <style>
@@ -22,12 +20,16 @@ custom_js:
     border: 1px solid black;
   }
 
-  h1 {
+  h1,
+  #restart {
     display: block;
-    margin: 10px auto;
-    color: #ddd;
-    font-size: 20px;
     text-align: center;
+    color: #ddd;
+  }
+
+  h1 {
+    margin: 10px auto;
+    font-size: 20px;
   }
 
   .color,
@@ -55,25 +57,17 @@ custom_js:
     padding: 1px;
   }
 
-  .buttons {
-    display: flex;
-    justify-content: center;
-  }
-
-  .buttons button {
+  #restart {
     margin: 5px auto 0;
     background-color: #333;
     border-color: #ddd;
-    color: #ddd;
   }
 </style>
 <script src="https://d3js.org/d3-color.v1.min.js"></script>
 <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 
-<h1>
-  <a href="https://en.wikipedia.org/wiki/Julia_set">Julia Wiki</a>
-</h1>
+<h1>Sierpiński Triangle Zoom</h1>
 <label class="color">
   <div>Color Scheme:</div>
   <select id="color"></select>
@@ -81,19 +75,12 @@ custom_js:
 <canvas id="draw" width="800" height="600"></canvas>
 <div id="inputs">
   <label>
-    <div>CX:</div>
-    <input class="x" type="number" value="-0.775" />
+    <div>X:</div>
+    <input class="x" type="number" value="0.001" />
   </label>
   <label>
-    <div>CY:</div>
-    <input class="y" type="number" value="0.1625" />
-  </label>
-  <label>
-    <div>CR:</div>
-    <input class="r" type="number" value="0.025" />
+    <div>Y:</div>
+    <input class="y" type="number" value="0.001" />
   </label>
 </div>
-<div class="buttons">
-  <button id="reset">Reset</button>
-  <button id="share">Share</button>
-</div>
+<button id="restart">restart</button>

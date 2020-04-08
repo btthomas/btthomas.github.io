@@ -204,7 +204,7 @@
   }
 
   function share() {
-    const url = `https://btthomas.github.io/projects/2020/04/05/julia.html?cx=${CX}&cy=${CY}cr=${CR}&color=${select.value}`;
+    const url = `https://btthomas.github.io/projects/2020/04/05/julia.html?cx=${CX}&cy=${CY}&cr=${CR}&color=${select.value}`;
     copyToClipboard(url);
     showMessage();
   }
