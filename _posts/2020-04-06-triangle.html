@@ -5,6 +5,7 @@ title: 'Sierpiński triangle'
 date: 2020-04-05 12:00:00
 categories: projects
 custom_js:
+  - color
   - triangle
 ---
 
@@ -56,17 +57,14 @@ custom_js:
     border-radius: 5px;
     padding: 1px;
   }
-
-  #restart {
-    margin: 5px auto 0;
-    background-color: #333;
-    border-color: #ddd;
-  }
 </style>
 <script src="https://d3js.org/d3-color.v1.min.js"></script>
 <script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 
 <h1>Sierpiński Triangle Warp</h1>
+<label class="color">
+  <div>Color Scheme:</div>
+  <select id="color"></select>
+</label>
 <canvas id="draw" width="800" height="600"></canvas>
-<button id="restart">restart</button>
