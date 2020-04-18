@@ -1,8 +1,13 @@
 (function () {
   cWidth = document.body.clientWidth;
   cHeight = document.body.clientHeight;
-  const width = cWidth > 500 ? 500 : cWidth;
-  const height = cHeight > 400 ? 400 : cHeight;
+  // const width = cWidth > 500 ? 500 : cWidth;
+  // const height = cHeight > 400 ? 400 : cHeight;
+  const width = 640;
+  const height = 360;
+
+  const CAPTURE_GIF = true;
+  let gif;
 
   const MAX_SPEED = 16;
   const COLORS = 64;
@@ -32,6 +37,19 @@
   init();
 
   function init() {
+    gif = new GIF({
+      workers: 2,
+      quality: 10,
+    });
+    gif.on('finished', function (blob) {
+      var blobUrl = URL.createObjectURL(blob);
+      var link = document.createElement('a'); // Or maybe get it from the current document
+      link.href = blobUrl;
+      link.download = 'mandle.gif';
+      document.body.appendChild(link);
+      link.click();
+    });
+
     readParams();
     setAxis();
     setScale();
@@ -162,11 +180,20 @@
     imageData.data.set(buf8);
     ctx.putImageData(imageData, 0, 0);
 
+    if (CAPTURE_GIF && MAX > 50 && MAX < 300) {
+      gif.addFrame(canvas, { copy: true, delay: 100 });
+    }
+
+    if (MAX === 200) {
+      gif.render();
+      return;
+    }
+
     zoom();
 
     MAX += counter = 1 - counter;
     if (MAX > 375) {
-      reset();
+      // reset();
     }
 
     // console.timeEnd(s);
@@ -174,6 +201,8 @@
   }
 
   function reset() {
+    gif.render();
+
     MAX = 64;
     const inputs = document.getElementById('inputs');
     GX = +inputs.querySelector('.x').value;
