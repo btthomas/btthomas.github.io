@@ -1,6 +1,6 @@
 (function () {
   cWidth = document.body.clientWidth;
-  cHeight = document.body.clientHeight;
+  cHeight = document.documentElement.clientHeight - 100;
   const width = cWidth > 1200 ? 1200 : cWidth;
   const height = cHeight > 1000 ? 1000 : cHeight;
 
