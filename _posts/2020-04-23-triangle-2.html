@@ -1,0 +1,63 @@
+---
+layout: plain
+number: 6
+title: 'Sierpiński Triangle Two'
+date: 2020-04-23 12:00:00
+categories: projects
+custom_js:
+  - color
+  - triangletwo
+---
+
+<style>
+  body {
+    background-color: black;
+    min-height: 100vh;
+    margin: 0;
+  }
+  canvas {
+    display: block;
+    margin: 10px auto 0;
+    border: 1px solid black;
+  }
+
+  h1 {
+    display: block;
+    text-align: center;
+    color: #ddd;
+    margin: 10px auto;
+    font-size: 20px;
+  }
+
+  .color {
+    display: flex;
+    align-items: center;
+    margin: 5px auto;
+    width: 95%;
+    max-width: 500px;
+  }
+
+  .color div {
+    flex: 0 0 auto;
+    color: #ddd;
+    margin-right: 10px;
+  }
+
+  .color select {
+    flex: 1;
+    background-color: #ddd;
+    color: #333;
+    border-radius: 5px;
+    padding: 1px;
+  }
+</style>
+<script src="https://d3js.org/d3-color.v1.min.js"></script>
+<script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+
+<h1>Sierpiński Triangle Warp (2)</h1>
+<label class="color">
+  <div>Color Scheme:</div>
+  <select id="color"></select>
+</label>
+<canvas id="draw" width="800" height="600"></canvas>
